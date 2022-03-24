@@ -1,22 +1,22 @@
-// Client, api, vs db de tablolarını oluşturacak migration oluşturur
+* Creating Migration For ConfigurationDbContext (Client, ApiScope, vs tables)
 add-migration Inıtial -c ConfigurationDbContext
 dotnet ef migrations add InitialConfigurationDbContext -c ConfigurationDbContext -o Data/Migrations/ConfigDbContext
 
-/ PersistedGrant tablolarını oluşturacak migration oluşturur
+* Creating Migration For PersistedGrantDbContext (DeviceCodes, PersistedGrants tables)
 add-migration Inıtial -c PersistedGrantDbContext
 dotnet ef migrations add InitialPersistedGrantDbContext -c PersistedGrantDbContext -o Data/Migrations/PersistGrantDbContext
 
-// Identity tablolarını vs db de kayıtlarını oluşturacak migration oluşturur
+* Creating Migration For ApplicationDbContext (AspNetRoles, AspNetUsers, vs tables)
 add-migration Inıtial -c ApplicationDbContext
 dotnet ef migrations add InitialApplicationDbContext -c ApplicationDbContext -o Data/Migrations/AppDbContext
 
-// Client, api, vs db de tablolarını oluşturacak migration db de calıştırır
+* Creating DB Tables For ConfigurationDbContext By Migration
 dotnet ef database update ConfigurationDbContextMigration -c ConfigurationDbContext
 
-// PersistedGrant tablolarını oluşturacak migration db de calıştırır
+* Creating DB Tables For PersistedGrantDbContext By Migration
 dotnet ef database update PersistedGrantDbContextMigration -c PersistedGrantDbContext
 
-// Identity tablolarını oluşturacak migration db de calıştırır
+* Creating DB Tables For ApplicationDbContext By Migration
 dotnet ef database update ApplicationDbContextMigration -c ApplicationDbContext
 
 
