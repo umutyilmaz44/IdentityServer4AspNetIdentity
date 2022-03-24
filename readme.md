@@ -1,6 +1,6 @@
 # IdentityService
 
-Microservices Architecture (IdentityService) on .NET 3.1 with applying IdentiyServer4, AspNetIdentiy, Postgresql, InMemory
+Microservices Architecture (IdentityService) on .NET 3.1 with applying IdentityServer4, AspNetIdentity, Postgresql, InMemory
 
 * Creating Migration For ConfigurationDbContext (Client, ApiScope, vs tables)
 add-migration Inıtial -c ConfigurationDbContext
