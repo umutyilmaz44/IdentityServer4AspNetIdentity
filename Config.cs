@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
-namespace IdentityServerAspNetIdentity
+namespace NetShop.IdentityService
 {
     public static class Config
     {

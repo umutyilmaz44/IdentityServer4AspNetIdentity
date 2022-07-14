@@ -3,10 +3,9 @@ using System;
 using IdentityServer4.EntityFramework.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
+namespace NetShop.IdentityService.Data.Migrations.ConfigDbContext
 {
     [DbContext(typeof(ConfigurationDbContext))]
     partial class ConfigurationDbContextModelSnapshot : ModelSnapshot
@@ -15,9 +14,9 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
-                .HasAnnotation("ProductVersion", "3.1.5")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63)
+                .HasAnnotation("ProductVersion", "5.0.17")
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResource", b =>
                 {
@@ -27,19 +26,19 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("AllowedAccessTokenSigningAlgorithms")
-                        .HasColumnType("character varying(100)")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
-                        .HasColumnType("character varying(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
 
                     b.Property<string>("DisplayName")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean");
@@ -49,8 +48,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<bool>("NonEditable")
                         .HasColumnType("boolean");
@@ -81,8 +80,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.HasKey("Id");
 
@@ -103,13 +102,13 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
 
                     b.Property<string>("Key")
                         .IsRequired()
-                        .HasColumnType("character varying(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("character varying(2000)")
-                        .HasMaxLength(2000);
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.HasKey("Id");
 
@@ -130,8 +129,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
 
                     b.Property<string>("Scope")
                         .IsRequired()
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.HasKey("Id");
 
@@ -154,21 +153,21 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
-                        .HasColumnType("character varying(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
 
                     b.Property<DateTime?>("Expiration")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasColumnType("character varying(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("character varying(4000)")
-                        .HasMaxLength(4000);
+                        .HasMaxLength(4000)
+                        .HasColumnType("character varying(4000)");
 
                     b.HasKey("Id");
 
@@ -185,12 +184,12 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Description")
-                        .HasColumnType("character varying(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
 
                     b.Property<string>("DisplayName")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<bool>("Emphasize")
                         .HasColumnType("boolean");
@@ -200,8 +199,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<bool>("Required")
                         .HasColumnType("boolean");
@@ -229,8 +228,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.HasKey("Id");
 
@@ -248,16 +247,16 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
 
                     b.Property<string>("Key")
                         .IsRequired()
-                        .HasColumnType("character varying(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
 
                     b.Property<int>("ScopeId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("character varying(2000)")
-                        .HasMaxLength(2000);
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.HasKey("Id");
 
@@ -295,8 +294,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasColumnType("boolean");
 
                     b.Property<string>("AllowedIdentityTokenSigningAlgorithms")
-                        .HasColumnType("character varying(100)")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<bool>("AlwaysIncludeUserClaimsInIdToken")
                         .HasColumnType("boolean");
@@ -311,25 +310,25 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasColumnType("boolean");
 
                     b.Property<string>("BackChannelLogoutUri")
-                        .HasColumnType("character varying(2000)")
-                        .HasMaxLength(2000);
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.Property<string>("ClientClaimsPrefix")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("ClientId")
                         .IsRequired()
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("ClientName")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("ClientUri")
-                        .HasColumnType("character varying(2000)")
-                        .HasMaxLength(2000);
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.Property<int?>("ConsentLifetime")
                         .HasColumnType("integer");
@@ -338,8 +337,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
-                        .HasColumnType("character varying(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
 
                     b.Property<int>("DeviceCodeLifetime")
                         .HasColumnType("integer");
@@ -354,8 +353,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasColumnType("boolean");
 
                     b.Property<string>("FrontChannelLogoutUri")
-                        .HasColumnType("character varying(2000)")
-                        .HasMaxLength(2000);
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.Property<int>("IdentityTokenLifetime")
                         .HasColumnType("integer");
@@ -367,20 +366,20 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("LogoUri")
-                        .HasColumnType("character varying(2000)")
-                        .HasMaxLength(2000);
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.Property<bool>("NonEditable")
                         .HasColumnType("boolean");
 
                     b.Property<string>("PairWiseSubjectSalt")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("ProtocolType")
                         .IsRequired()
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<int>("RefreshTokenExpiration")
                         .HasColumnType("integer");
@@ -410,8 +409,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("UserCodeType")
-                        .HasColumnType("character varying(100)")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<int?>("UserSsoLifetime")
                         .HasColumnType("integer");
@@ -436,13 +435,13 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasColumnType("character varying(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("character varying(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
 
                     b.HasKey("Id");
 
@@ -463,8 +462,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
 
                     b.Property<string>("Origin")
                         .IsRequired()
-                        .HasColumnType("character varying(150)")
-                        .HasMaxLength(150);
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
 
                     b.HasKey("Id");
 
@@ -485,8 +484,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
 
                     b.Property<string>("GrantType")
                         .IsRequired()
-                        .HasColumnType("character varying(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
 
                     b.HasKey("Id");
 
@@ -507,8 +506,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
 
                     b.Property<string>("Provider")
                         .IsRequired()
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.HasKey("Id");
 
@@ -529,8 +528,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
 
                     b.Property<string>("PostLogoutRedirectUri")
                         .IsRequired()
-                        .HasColumnType("character varying(2000)")
-                        .HasMaxLength(2000);
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.HasKey("Id");
 
@@ -551,13 +550,13 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
 
                     b.Property<string>("Key")
                         .IsRequired()
-                        .HasColumnType("character varying(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("character varying(2000)")
-                        .HasMaxLength(2000);
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.HasKey("Id");
 
@@ -578,8 +577,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
 
                     b.Property<string>("RedirectUri")
                         .IsRequired()
-                        .HasColumnType("character varying(2000)")
-                        .HasMaxLength(2000);
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.HasKey("Id");
 
@@ -600,8 +599,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
 
                     b.Property<string>("Scope")
                         .IsRequired()
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.HasKey("Id");
 
@@ -624,21 +623,21 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
-                        .HasColumnType("character varying(2000)")
-                        .HasMaxLength(2000);
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.Property<DateTime?>("Expiration")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasColumnType("character varying(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("character varying(4000)")
-                        .HasMaxLength(4000);
+                        .HasMaxLength(4000)
+                        .HasColumnType("character varying(4000)");
 
                     b.HasKey("Id");
 
@@ -658,12 +657,12 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
-                        .HasColumnType("character varying(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
 
                     b.Property<string>("DisplayName")
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<bool>("Emphasize")
                         .HasColumnType("boolean");
@@ -673,8 +672,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<bool>("NonEditable")
                         .HasColumnType("boolean");
@@ -708,8 +707,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasColumnType("character varying(200)")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.HasKey("Id");
 
@@ -730,13 +729,13 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
 
                     b.Property<string>("Key")
                         .IsRequired()
-                        .HasColumnType("character varying(250)")
-                        .HasMaxLength(250);
+                        .HasMaxLength(250)
+                        .HasColumnType("character varying(250)");
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("character varying(2000)")
-                        .HasMaxLength(2000);
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.HasKey("Id");
 
@@ -752,6 +751,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApiResource");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResourceProperty", b =>
@@ -761,6 +762,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApiResource");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResourceScope", b =>
@@ -770,6 +773,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApiResource");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResourceSecret", b =>
@@ -779,6 +784,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApiResource");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiScopeClaim", b =>
@@ -788,6 +795,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasForeignKey("ScopeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Scope");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiScopeProperty", b =>
@@ -797,6 +806,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasForeignKey("ScopeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Scope");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientClaim", b =>
@@ -806,6 +817,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientCorsOrigin", b =>
@@ -815,6 +828,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientGrantType", b =>
@@ -824,6 +839,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientIdPRestriction", b =>
@@ -833,6 +850,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientPostLogoutRedirectUri", b =>
@@ -842,6 +861,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientProperty", b =>
@@ -851,6 +872,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientRedirectUri", b =>
@@ -860,6 +883,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientScope", b =>
@@ -869,6 +894,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientSecret", b =>
@@ -878,6 +905,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.IdentityResourceClaim", b =>
@@ -887,6 +916,8 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasForeignKey("IdentityResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("IdentityResource");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.IdentityResourceProperty", b =>
@@ -896,6 +927,54 @@ namespace IdentityServerAspNetIdentity.Data.Migrations.ConfigDbContext
                         .HasForeignKey("IdentityResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("IdentityResource");
+                });
+
+            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResource", b =>
+                {
+                    b.Navigation("Properties");
+
+                    b.Navigation("Scopes");
+
+                    b.Navigation("Secrets");
+
+                    b.Navigation("UserClaims");
+                });
+
+            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiScope", b =>
+                {
+                    b.Navigation("Properties");
+
+                    b.Navigation("UserClaims");
+                });
+
+            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.Client", b =>
+                {
+                    b.Navigation("AllowedCorsOrigins");
+
+                    b.Navigation("AllowedGrantTypes");
+
+                    b.Navigation("AllowedScopes");
+
+                    b.Navigation("Claims");
+
+                    b.Navigation("ClientSecrets");
+
+                    b.Navigation("IdentityProviderRestrictions");
+
+                    b.Navigation("PostLogoutRedirectUris");
+
+                    b.Navigation("Properties");
+
+                    b.Navigation("RedirectUris");
+                });
+
+            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.IdentityResource", b =>
+                {
+                    b.Navigation("Properties");
+
+                    b.Navigation("UserClaims");
                 });
 #pragma warning restore 612, 618
         }

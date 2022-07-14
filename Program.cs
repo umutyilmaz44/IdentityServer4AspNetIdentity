@@ -2,62 +2,32 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using IdentityServerAspNetIdentity.Services;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using Serilog.Events;
-using Serilog.Sinks.SystemConsole.Themes;
 using System;
-using System.Linq;
 
-namespace IdentityServerAspNetIdentity
+namespace NetShop.IdentityService
 {
     public class Program
     {
         public static int Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-                .MinimumLevel.Override("Microsoft.Hosting.Lifetime", LogEventLevel.Information)
-                .MinimumLevel.Override("System", LogEventLevel.Warning)
-                .MinimumLevel.Override("Microsoft.AspNetCore.Authentication", LogEventLevel.Information)
-                .Enrich.FromLogContext()
-                // uncomment to write to Azure diagnostics stream
-                //.WriteTo.File(
-                //    @"D:\home\LogFiles\Application\identityserver.txt",
-                //    fileSizeLimitBytes: 1_000_000,
-                //    rollOnFileSizeLimit: true,
-                //    shared: true,
-                //    flushToDiskInterval: TimeSpan.FromSeconds(1))
-                .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}", theme: AnsiConsoleTheme.Code)
+                .ReadFrom.Configuration(serilogConfiguration())
                 .CreateLogger();
 
             try
             {
-                var seed = args.Contains("/seed");
-                if (seed)
-                {
-                    args = args.Except(new[] { "/seed" }).ToArray();
-                }
+                string hostEnv = String.IsNullOrEmpty(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")) ? "Development" : Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-                var host = CreateHostBuilder(args).Build();
-
-                if (seed)
-                {
-                    Log.Information("Seeding database...");
-                    var config = host.Services.GetRequiredService<IConfiguration>();
-                    var connectionString = config.GetConnectionString("DefaultConnection");
-                    SeedData.EnsureSeedData(connectionString);
-                    Log.Information("Done seeding database.");
-                    return 0;
-                }
-
+                Log.Debug($"Environment['ASPNETCORE_ENVIRONMENT'] = {Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}");
+                Log.Debug($"IWebHostEnvironment['EnvironmentName'] = {hostEnv}");
                 Log.Information("Starting host...");
-                host.Run();
+                
+                CreateHostBuilder(args).Build().Run();
                 return 0;
             }
             catch (Exception ex)
@@ -71,12 +41,34 @@ namespace IdentityServerAspNetIdentity
             }
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .UseSerilog()
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+        public static IHostBuilder CreateHostBuilder(string[] args) 
+        {
+            return Host.CreateDefaultBuilder(args)
+                        .ConfigureAppConfiguration((hostContext, config) => {
+                            var env = hostContext.HostingEnvironment;
+                            config.SetBasePath(System.IO.Directory.GetCurrentDirectory())
+                                    .AddJsonFile($"appsettings.json", optional: false)
+                                    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                                    .AddEnvironmentVariables();
+                        })
+                        .ConfigureWebHostDefaults(webBuilder => {
+                            webBuilder                           
+                                .ConfigureLogging(c => c.ClearProviders())
+                                .UseStartup<Startup>();
+                        })
+                        .UseSerilog();
+        }
+        private static IConfiguration serilogConfiguration()
+        {   
+            string env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            env = String.IsNullOrEmpty(env) ? "Development" : env;
+
+            return new ConfigurationBuilder()
+                        .SetBasePath(System.IO.Directory.GetCurrentDirectory()) 
+                        .AddJsonFile($"appsettings.json", optional: false)
+                        .AddJsonFile($"appsettings.{env}.json", optional: true)                      
+                        .AddEnvironmentVariables()
+                        .Build();
+        }
     }
 }

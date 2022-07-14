@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
-using IdentityServerAspNetIdentity.Models;
 using Microsoft.AspNetCore.Identity;
+using NetShop.IdentityService.Models;
 
-namespace IdentityServerAspNetIdentity.Services
+namespace NetShop.IdentityService.Services
 {
     public class ProfileService : IProfileService
     {

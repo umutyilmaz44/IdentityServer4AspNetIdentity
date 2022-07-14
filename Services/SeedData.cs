@@ -6,16 +6,16 @@ using System;
 using System.Linq;
 using System.Security.Claims;
 using IdentityModel;
-using IdentityServerAspNetIdentity.Data;
-using IdentityServerAspNetIdentity.Models;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using NetShop.IdentityService.Data;
+using NetShop.IdentityService.Models;
 using Serilog;
 
-namespace IdentityServerAspNetIdentity.Services
+namespace NetShop.IdentityService.Services
 {
     public class SeedData
     {
@@ -25,6 +25,11 @@ namespace IdentityServerAspNetIdentity.Services
             services.AddLogging();
             services.AddDbContext<ApplicationDbContext>(options =>
                options.UseSqlite(connectionString));
+            // services.AddDbContext<ApplicationDbContext>(options =>
+            //     options.UseSqlServer(conStringDefault));
+            // services.AddDbContext<ApplicationDbContext>(options =>
+            //     options.UseNpgsql(conStringPostresql));
+
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

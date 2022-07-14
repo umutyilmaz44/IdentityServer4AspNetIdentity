@@ -2,21 +2,21 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using System.Reflection;
+using System;
 using IdentityServer4;
 using IdentityServer4.Services;
-using IdentityServerAspNetIdentity.Data;
-using IdentityServerAspNetIdentity.Models;
-using IdentityServerAspNetIdentity.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using NetShop.IdentityService.Data;
+using NetShop.IdentityService.Models;
+using NetShop.IdentityService.Services;
 
-namespace IdentityServerAspNetIdentity
+namespace NetShop.IdentityService
 {
     public class Startup
     {
@@ -33,56 +33,13 @@ namespace IdentityServerAspNetIdentity
         {
             services.AddControllersWithViews();
 
-            var conStringDefault = Configuration.GetConnectionString("DefaultConnection");
-            var conStringPostresql = Configuration.GetConnectionString("PostgreSQLConnection");
-            var migrationAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
-
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(conStringDefault));
-            // services.AddDbContext<ApplicationDbContext>(options =>
-            //     options.UseSqlServer(conStringDefault));
-            // services.AddDbContext<ApplicationDbContext>(options =>
-            //     options.UseNpgsql(conStringPostresql));
-
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+                    .AddEntityFrameworkStores<ApplicationDbContext>()
+                    .AddDefaultTokenProviders();
 
-            var builder = services.AddIdentityServer(options =>
-                {
-                    options.Events.RaiseErrorEvents = true;
-                    options.Events.RaiseInformationEvents = true;
-                    options.Events.RaiseFailureEvents = true;
-                    options.Events.RaiseSuccessEvents = true;
+            services.AddPersistenceRegistration(Configuration);
 
-                    // see https://identityserver4.readthedocs.io/en/latest/topics/resources.html
-                    options.EmitStaticAudienceClaim = true;
-                })
-                .AddAspNetIdentity<ApplicationUser>()
-                .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
-
-                // For InMemory Usage
-                .AddInMemoryIdentityResources(Config.IdentityResources)
-                .AddInMemoryApiResources(Config.ApiResources)
-                .AddInMemoryApiScopes(Config.ApiScopes)
-                .AddInMemoryClients(Config.Clients);
-
-                // For Postgresql Usage
-                // .AddConfigurationStore(options => {
-                //     options.ConfigureDbContext = cdbc => {
-                //         cdbc.UseNpgsql(conStringPostresql, 
-                //         sqlOptions => sqlOptions.MigrationsAssembly(migrationAssembly));
-                //     };
-                // })
-                // .AddOperationalStore(options => {
-                //     options.ConfigureDbContext = cdbc => {
-                //         cdbc.UseNpgsql(conStringPostresql, 
-                //         sqlOptions => sqlOptions.MigrationsAssembly(migrationAssembly));
-                //     };
-                // });
-
-            // not recommended for production - you need to store your key material somewhere secure
-            builder.AddDeveloperSigningCredential();
+            services.AddIdentityServerRegistration(Configuration);
             
             services.AddScoped<IProfileService, ProfileService>();
             services.AddAuthentication()
@@ -96,15 +53,27 @@ namespace IdentityServerAspNetIdentity
                     options.ClientId = "copy client ID from Google here";
                     options.ClientSecret = "copy client secret from Google here";
                 });
+
+            services.AddDatabaseDeveloperPageExceptionFilter();
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, ILogger<Startup> logger)
         {
+            logger.LogDebug("UseHttps: " + Configuration["UseHttps"].ToUpper());
+            if (!String.IsNullOrEmpty(Configuration["UseHttps"]) && Configuration["UseHttps"].ToUpper() == "YES")
+            {
+                app.UseHsts();
+                app.UseHttpsRedirection();
+                logger.LogDebug("Https Redirection is enabled.");
+            }
+
             if (Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+                app.UseMigrationsEndPoint();
             }
+
+            InitializeDatabase.MigrateDatabase(app, Configuration);
 
             app.UseStaticFiles();
 

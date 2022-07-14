@@ -2,10 +2,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using IdentityModel;
 using IdentityServer4.Validation;
-using IdentityServerAspNetIdentity.Models;
+using NetShop.IdentityService.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace IdentityServerAspNetIdentity.Services
+namespace NetShop.IdentityService.Services
 {
     public class ResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
     {
