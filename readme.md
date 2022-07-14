@@ -39,7 +39,7 @@ Creating DB Tables For ApplicationDbContext By Migration
 
 ## To Work With Postgresql
  * cd project-path
- * docker run -d --rm --network netshop-network -p 5432:5432 --name c_netshop_identity_db_service \
+ * docker run -d --rm --network netshop-network -p 5432:5432 --name c_netshop_identity_service_db \
 -e POSTGRES_PASSWORD=netshop -e POSTGRES_USER=postgres -e POSTGRES_DB=NetShopIdentityDb \
 -v ***```postgresqlDataPath```***:/var/lib/postgresql/data \
 postgres
@@ -74,11 +74,11 @@ uyilmaz/netshop_identity_service
 version: '3.7'
 
 services:
-  c_netshop_identity_db_service:
+  c_netshop_identity_service_db:
     image: postgres
     restart: on-failure
     environment:
-      - POSTGRES_PASSWORD=netshop
+      - POSTGRES_PASSWORD=password
       - POSTGRES_USER=postgres 
       - POSTGRES_DB=NetShopIdentityDb
     ports:
@@ -89,16 +89,16 @@ services:
       - netshop-network
       
   c_netshop_identity_service:
-    image: netshop_identity_service
+    image: uyilmaz/netshop_identity_service
     depends_on:
-      - "c_netshop_identity_db_service"
+      - "c_netshop_identity_service_db"
     restart: on-failure
     environment:
       - DbSettings__DatabaseType=Postgresql
-      - DbSettings__PostgresqlSettings__Host=c_netshop_identity_db_service
+      - DbSettings__PostgresqlSettings__Host=c_netshop_identity_service_db
       - DbSettings__PostgresqlSettings__Port=5432
       - DbSettings__PostgresqlSettings__Username=postgres
-      - DbSettings__PostgresqlSettings__Password=netshop
+      - DbSettings__PostgresqlSettings__Password=password
       - DbSettings__PostgresqlSettings__Database=NetShopIdentityDb
       - UseHttps=yes
       - ASPNETCORE_URLS=https://+;http://+
