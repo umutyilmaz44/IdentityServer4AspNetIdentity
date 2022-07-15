@@ -33,7 +33,8 @@ namespace NetShop.IdentityService
             catch (Exception ex)
             {
                 Log.Fatal(ex, "Host terminated unexpectedly.");
-                return 1;
+
+                throw ex;
             }
             finally
             {

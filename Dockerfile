@@ -24,7 +24,7 @@ LABEL maintainer="Ümit YILMAZ <umutyilmaz44@gmail.com>" name="netShop.IdentityS
 
 ENV ASPNETCORE_ENVIRONMENT=Development
 ENV UseHttps=YES
-ENV ASPNETCORE_HTTPS_PORT=5001
+ENV HTTPS_PORT=5001
 ENV DbSettings__Host=127.0.0.1
 ENV DbSettings__Port=5432
 ENV DbSettings__Username=postgres

@@ -55,15 +55,16 @@ postgres
 
 ## To run local docker image with HTTPS:
  * docker container run --rm --network netshop-network -p 5000:80 -p 5001:443 --name c_netshop_identity_service \
--e DbSettings__PostgresqlSettings__Host=***```postgresqlAddress```*** -e UseHttps=yes \
--e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_HTTPS_PORT=5001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="netProduct123." \
+-e DbSettings__PostgresqlSettings__Host=***```postgresqlAddress```*** -e UseHttps=yes -e HTTPS_PORT=5001 \
+-e ASPNETCORE_URLS="https://+;http://+" \
+-e ASPNETCORE_Kestrel__Certificates__Default__Password="netProduct123." \
 -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/netShop.IdentityService.pfx -v ${HOME}/.aspnet/https:/https/ \
 netshop_identity_service
 
 ## To run docker hub image with HTTPS:
  * docker container run --rm --network netshop-network -p 5000:80 -p 5001:443 --name c_netshop_identity_service \
--e DbSettings__PostgresqlSettings__Host=***```postgresqlAddress```*** -e UseHttps=yes \
--e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_HTTPS_PORT=5001 \
+-e DbSettings__PostgresqlSettings__Host=***```postgresqlAddress```*** -e UseHttps=yes -e HTTPS_PORT=5001 \
+-e ASPNETCORE_URLS="https://+;http://+" \
 -e ASPNETCORE_Kestrel__Certificates__Default__Password="netProduct123." \
 -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/netShop.IdentityService.pfx -v ${HOME}/.aspnet/https:/https/ \
 uyilmaz/netshop_identity_service
@@ -101,8 +102,8 @@ services:
       - DbSettings__PostgresqlSettings__Password=password
       - DbSettings__PostgresqlSettings__Database=NetShopIdentityDb
       - UseHttps=yes
-      - ASPNETCORE_URLS=https://+;http://+
-      - ASPNETCORE_HTTPS_PORT=5001
+      - HTTPS_PORT=5001
+      - ASPNETCORE_URLS=https://+;http://+      
       - ASPNETCORE_Kestrel__Certificates__Default__Password=netProduct123.
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/netShop.IdentityService.pfx
     ports:
